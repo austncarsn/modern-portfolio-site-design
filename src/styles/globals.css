@@ -1,0 +1,249 @@
+/* ========================================================================== */
+/*  Imports & Typography                                                      */
+/* ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+/* ========================================================================== */
+/*  Design Tokens — Avant-Garde Museum / Quiet Luxury Editorial               */
+/* ========================================================================== */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ── Surface palette ── */
+  --surface-0: #FFFEF9;
+  --surface-1: #F5F4F1;
+  --surface-2: #E4E3DE;
+
+  /* ── Border ── */
+  --border-1: #CAC5BB;
+
+  /* ── Text ── */
+  --text-1: #29261F;
+  --text-2: #85827D;
+
+  /* ── Selected state ── */
+  --selected-bg: #29261F;
+  --selected-fg: #FFFEF9;
+
+  /* ── Semantic mapping ── */
+  --bg: var(--surface-0);
+  --ink: var(--text-1);
+  --border-color: var(--border-1);
+  --card-bg: var(--surface-0);
+
+  /* ── Compatibility Tokens ── */
+  --background: var(--surface-0);
+  --foreground: var(--text-1);
+  --card: var(--surface-0);
+  --card-foreground: var(--text-1);
+  --popover: var(--surface-0);
+  --popover-foreground: var(--text-1);
+  --primary: var(--text-1);
+  --primary-foreground: var(--surface-0);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text-1);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--text-2);
+  --accent-token: var(--text-1);
+  --accent-foreground: var(--surface-0);
+  --destructive: #9B2C2C;
+  --destructive-foreground: var(--surface-0);
+  --border: var(--border-1);
+  --input: transparent;
+  --input-background: var(--surface-1);
+  --switch-background: var(--surface-2);
+  --ring: var(--text-1);
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-base: 16px;
+  --ts-display: 3rem;
+  --ts-h1: 2.25rem;
+  --ts-h2: 1.75rem;
+  --ts-h3: 1.25rem;
+  --ts-body: 1rem;
+  --ts-caption: 0.8125rem;
+  --ts-small: 0.75rem;
+  --ts-overline: 0.6875rem;
+
+  /* ── Spacing (4px scale) ── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 28px;
+  --sp-8: 32px;
+  --sp-9: 36px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* ── Layout ── */
+  --radius: 0px;
+  --r-sm: 0px;
+  --r-md: 0px;
+  --r-lg: 0px;
+  --shadow-card: none;
+}
+
+/* ========================================================================== */
+/*  Theme Configuration (Tailwind v4)                                         */
+/* ========================================================================== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent-token);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+/* ========================================================================== */
+/*  Base Layer                                                                */
+/* ========================================================================== */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--font-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  *:focus-visible {
+    outline: 1px solid var(--text-1);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--selected-bg);
+    color: var(--selected-fg);
+  }
+}
+
+/* ========================================================================== */
+/*  Utilities                                                                 */
+/* ========================================================================== */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navigation helpers */
+.nav-links-desktop {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.nav-links-desktop a, .nav-links-desktop a:visited {
+  color: var(--text-1);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background-color 140ms ease, color 140ms ease, transform 120ms ease;
+}
+
+.nav-links-desktop a:hover {
+  background: var(--surface-2);
+  color: var(--text-1);
+  transform: translateY(-1px);
+}
+
+/* mobile-only / desktop-only helpers */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 860px) {
+  .mobile-only {
+    display: inline-flex;
+  }
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: color-mix(in srgb, var(--surface-1) 92%, black 0%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 64px;
+}
+
+.mobile-nav-panel {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 20px;
+  background: var(--surface-0);
+  border: 1px solid var(--border-1);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.mobile-nav-panel a {
+  display: block;
+  padding: 12px 8px;
+  border-radius: 8px;
+  color: var(--text-1);
+  text-decoration: none;
+}
+
+.mobile-nav-panel a:hover {
+  background: var(--surface-2);
+}
+
