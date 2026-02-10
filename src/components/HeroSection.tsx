@@ -443,6 +443,9 @@ export function HeroSection({
               View Case Studies
               <ArrowUpRight size={14} strokeWidth={1.6} />
             </Link>
+            <Link to="/prompt-notebook" className="hero-action hero-action-secondary">
+              Open Notebook
+            </Link>
             <a href="mailto:austncarsn@gmail.com" className="hero-action hero-action-secondary">
               Contact
             </a>
