@@ -6,7 +6,10 @@ const NAV_LINKS = [
   { label: "Case Studies", href: "#/projects" },
   { label: "Gallery", href: "#/gallery" },
   { label: "Flashcards", href: "#/flashcards" },
+  { label: "Prompt Library", href: "#/prompt-library" },
   { label: "Notebook", href: "#/prompt-notebook" },
+  { label: "Cameo Store", href: "#/cameo-store" },
+  { label: "Resume", href: "#/resume" },
   { label: "Info", href: "#/info" },
 ] as const;
 

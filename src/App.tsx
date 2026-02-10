@@ -78,37 +78,9 @@ function ScrollToTop() {
 function PromptLibraryRoute() {
   const navigate = useNavigate();
   return (
-    <div style={{ minHeight: "100vh", background: "var(--surface-0)" }}>
-      <div
-        style={{
-          padding: "var(--sp-4) var(--sp-4) var(--sp-3)",
-          borderBottom: "1px solid var(--border-1)",
-          background: "var(--surface-1)",
-        }}
-      >
-        <button
-          onClick={() => navigate("/")}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "var(--sp-2)",
-            border: "1px solid var(--border-1)",
-            background: "transparent",
-            color: "var(--text-1)",
-            padding: "8px 12px",
-            fontSize: "var(--ts-overline)",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            cursor: "pointer",
-          }}
-        >
-          Back to Home
-        </button>
-      </div>
-      <Suspense fallback={<LoadingFallback message="Loading Prompt Library..." />}>
-        <PromptLibraryApp onNavigateToPortfolio={() => navigate("/")} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<LoadingFallback message="Loading Prompt Library..." />}>
+      <PromptLibraryApp onNavigateToPortfolio={() => navigate("/")} />
+    </Suspense>
   );
 }
 

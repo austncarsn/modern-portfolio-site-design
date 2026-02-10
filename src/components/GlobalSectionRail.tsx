@@ -10,6 +10,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { WheelNav, type NavItem } from "./WheelNav";
 import { SECTION_NAV_ITEMS, isSectionRoute, mapPathToSection } from "./section-nav-items";
 
+const AUXILIARY_NAV_ITEMS: NavItem[] = [
+  { id: "prompt-library", label: "Prompt Library", href: "/prompt-library" },
+  { id: "prompt-notebook", label: "Notebook", href: "/prompt-notebook" },
+  { id: "cameo-store", label: "Cameo Store", href: "/cameo-store" },
+  { id: "resume", label: "Resume", href: "/resume" },
+];
+
 export function GlobalSectionRail() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -25,6 +32,16 @@ export function GlobalSectionRail() {
 
   const isItemCurrent = useCallback((item: NavItem, currentPath: string) => {
     return mapPathToSection(currentPath) === item.href;
+  }, []);
+
+  const isAuxItemCurrent = useCallback((item: NavItem, currentPath: string) => {
+    if (item.href === "/cameo-store") {
+      return currentPath === "/cameo-store" || currentPath === "/cameo-store/case-study";
+    }
+    if (item.href === "/prompt-notebook") {
+      return currentPath.startsWith("/prompt-notebook");
+    }
+    return currentPath === item.href;
   }, []);
 
   const navigateTo = useCallback(
@@ -227,8 +244,45 @@ export function GlobalSectionRail() {
           border-color: var(--text-1);
           color: var(--surface-0);
         }
+        .global-wheel-secondary {
+          margin-top: var(--sp-2);
+          border: 1px solid color-mix(in srgb, var(--text-1) 14%, var(--border-1));
+          background: color-mix(in srgb, var(--surface-0) 86%, #efece4 14%);
+          padding: var(--sp-2);
+          display: grid;
+          gap: var(--sp-2);
+        }
+        .global-wheel-secondary-title {
+          margin: 0;
+          font-family: var(--font-body);
+          font-size: var(--ts-overline);
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--text-2);
+        }
+        .global-wheel-secondary-list {
+          display: grid;
+          gap: var(--sp-1);
+        }
+        .global-wheel-secondary-item {
+          border: 1px solid var(--border-1);
+          background: color-mix(in srgb, var(--surface-0) 82%, #f3f0e9 18%);
+          color: var(--text-1);
+          font-family: var(--font-body);
+          font-size: var(--ts-overline);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 9px 10px;
+          text-align: left;
+          cursor: pointer;
+        }
+        .global-wheel-secondary-item[data-active="true"] {
+          border-color: color-mix(in srgb, var(--text-1) 32%, var(--border-1));
+          background: color-mix(in srgb, var(--surface-1) 76%, #f7f3ec 24%);
+        }
         .global-wheel-mobile-item:focus-visible,
-        .global-wheel-modal-close:focus-visible {
+        .global-wheel-modal-close:focus-visible,
+        .global-wheel-secondary-item:focus-visible {
           outline: 2px solid color-mix(in srgb, var(--text-1) 76%, white 24%);
           outline-offset: 2px;
         }
@@ -252,6 +306,26 @@ export function GlobalSectionRail() {
           captureScrollOnEngage
           isItemCurrent={isItemCurrent}
         />
+        <div className="global-wheel-secondary" aria-label="Additional pages">
+          <p className="global-wheel-secondary-title">Additional Pages</p>
+          <div className="global-wheel-secondary-list">
+            {AUXILIARY_NAV_ITEMS.map((item) => {
+              const isCurrent = isAuxItemCurrent(item, pathname);
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  className="global-wheel-secondary-item"
+                  data-active={isCurrent ? "true" : "false"}
+                  aria-current={isCurrent ? "page" : undefined}
+                  onClick={() => navigateTo(item.href)}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </aside>
 
       <div className="global-wheel-rail-mobile">
@@ -314,6 +388,26 @@ export function GlobalSectionRail() {
                 </button>
               );
             })}
+          </div>
+          <div className="global-wheel-secondary" aria-label="Additional pages">
+            <p className="global-wheel-secondary-title">Additional Pages</p>
+            <div className="global-wheel-secondary-list">
+              {AUXILIARY_NAV_ITEMS.map((item) => {
+                const isCurrent = isAuxItemCurrent(item, pathname);
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className="global-wheel-secondary-item"
+                    data-active={isCurrent ? "true" : "false"}
+                    aria-current={isCurrent ? "page" : undefined}
+                    onClick={() => navigateTo(item.href)}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

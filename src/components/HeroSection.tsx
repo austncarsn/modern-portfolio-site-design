@@ -443,8 +443,14 @@ export function HeroSection({
               View Case Studies
               <ArrowUpRight size={14} strokeWidth={1.6} />
             </Link>
+            <Link to="/prompt-library" className="hero-action hero-action-secondary">
+              Prompt Library
+            </Link>
             <Link to="/prompt-notebook" className="hero-action hero-action-secondary">
               Open Notebook
+            </Link>
+            <Link to="/resume" className="hero-action hero-action-secondary">
+              Resume
             </Link>
             <a href="mailto:austncarsn@gmail.com" className="hero-action hero-action-secondary">
               Contact
